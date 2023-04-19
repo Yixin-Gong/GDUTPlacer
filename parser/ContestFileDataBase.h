@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace ContestFileParser {
@@ -26,8 +27,8 @@ namespace ContestFileParser {
 
             struct Pin {
                 string pinName;
-                int32_t pinLocation[2];
-                int32_t offset[2];
+                int32_t pinLocation[2]{};
+                int32_t offset[2]{};
 
                 ///constructor
                 Pin(string &pin_name, int32_t locY, int32_t locX, int32_t offsetX, int32_t offsetY) {
@@ -48,7 +49,7 @@ namespace ContestFileParser {
             struct LibCell {
                 bool isMacro;
                 string libCellName;
-                int32_t libCellSize[2];
+                int32_t libCellSize[2]{};
                 int32_t pinCount;
                 vector<Pin> vPin;
 
@@ -59,11 +60,11 @@ namespace ContestFileParser {
                     libCellSize[0] = x;
                     libCellSize[1] = y;
                     pinCount = pin_count;
-                    vPin = v_pin;
+                    vPin = std::move(v_pin);
                 }
 
                 virtual void reset() {
-                    isMacro = 0;
+                    isMacro = false;
                     libCellName = "";
                     libCellSize[0] = libCellSize[1] = 0;
                     pinCount = 0;
@@ -78,7 +79,7 @@ namespace ContestFileParser {
                 technologyCount = tech_count;
                 techName.swap(tech_name);
                 LibCellCount = lib_cell_count;
-                vLibCell = v_lib_cell;
+                vLibCell = std::move(v_lib_cell);
             }
 
             void reset() {
@@ -90,11 +91,11 @@ namespace ContestFileParser {
         };
 
         struct Die {
-            int32_t DieSize[4];
-            double DieUtil;
+            int32_t DieSize[4]{};
+            double DieUtil{};
 
             struct DieRow {
-                int32_t startXY[2];   ///< x, y
+                int32_t startXY[2]{};   ///< x, y
                 int32_t rowLength;      ///< row length
                 int32_t rowHeight;      ///< row height
                 int32_t repeatCount; ///< repeat count
@@ -119,6 +120,12 @@ namespace ContestFileParser {
             vector<DieRow> vDieRow;
             string DieTech;
 
+
+            ///constructor
+            Die(){
+                reset();
+            }
+
             ///constructor
             Die(int32_t startX, int32_t startY, int32_t sizeX, int32_t sizeY, double util,
                 vector<DieRow> v, string &tech) {
@@ -127,7 +134,7 @@ namespace ContestFileParser {
                 DieSize[2] = sizeX;
                 DieSize[3] = sizeY;
                 DieUtil = util;
-                vDieRow = v;
+                vDieRow = std::move(v);
                 DieTech.swap(tech);
             }
 
@@ -140,7 +147,7 @@ namespace ContestFileParser {
         };
 
         struct Terminal {
-            int32_t TerminalSize[2];
+            int32_t TerminalSize[2]{};
             int32_t spacing;
             int32_t cost;
 
@@ -161,8 +168,8 @@ namespace ContestFileParser {
         };
 
         struct Instance {
-            int32_t instanceCount;
-            int32_t netCount;
+            int32_t instanceCount{};
+            int32_t netCount{};
 
             struct InstCell {
                 string instName;
@@ -202,13 +209,13 @@ namespace ContestFileParser {
             struct Net {
                 string netName;
                 int32_t numPins;
-                vector<InstPin> vInstPin;
+                vector<InstPin> vInstPin{};
 
                 ///constructor
                 Net(string &name, int32_t num_pins, vector<InstPin> v) {
                     netName.swap(name);
                     numPins = num_pins;
-                    vInstPin = v;
+                    vInstPin = std::move(v);
                 }
 
                 void reset() {
@@ -218,16 +225,21 @@ namespace ContestFileParser {
                 }
             };
 
-            vector<InstCell> vInstCell;
-            vector<Net> vNet;
+            vector<InstCell> vInstCell{};
+            vector<Net> vNet{};
+
+
+            Instance(){
+                reset();
+            }
 
 
             ///constructor
             Instance(int32_t cell_count, int32_t net_count, vector<Net> v_net, vector<InstCell> v_cell) {
                 instanceCount = cell_count;
                 netCount = net_count;
-                vNet = v_net;
-                vInstCell = v_cell;
+                vNet = std::move(v_net);
+                vInstCell = std::move(v_cell);
             }
 
             void reset() {
@@ -240,22 +252,22 @@ namespace ContestFileParser {
 
         vector<Tech> vTech;
 
-        Die TopDie();
+        static Die TopDie(){ return {}; };
 
-        Die BottomDie();
+        static Die BottomDie(){return {};};
 
-        Terminal myTerminal();
+        static Terminal myTerminal(){ return {0, 0, 0, 0}; };
 
-        Instance myInstance();
+        static Instance myInstance(){return {};};
 
 
         ///constructor
         ContestFileDataBase(vector<Tech> v_tech, Die top, Die bottom, Terminal terminal, Instance instance) {
-            vTech = v_tech;
-            TopDie() = top;
-            BottomDie() = bottom;
+            vTech = std::move(v_tech);
+            TopDie() = std::move(top);
+            BottomDie() = std::move(bottom);
             myTerminal() = terminal;
-            myInstance() = instance;
+            myInstance() = std::move(instance);
         }
 
         void reset() {
