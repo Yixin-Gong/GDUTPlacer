@@ -4,9 +4,7 @@
   <component name="CidrRootsConfiguration">
     <sourceRoots>
       <file path="$PROJECT_DIR$" />
-    </sourceRoots>
-    <libraryRoots>
       <file path="$PROJECT_DIR$/parser" />
-    </libraryRoots>
+    </sourceRoots>
   </component>
 </project>
