@@ -74,14 +74,14 @@ namespace ContestFileParser {
             vector<LibCell> vLibCell;
 
             ///constructor
-            Tech(int32_t tech_count, string &tech_name, int32_t lib_cell_count, vector<LibCell> v_libcell) {
+            Tech(int32_t tech_count, string &tech_name, int32_t lib_cell_count, vector<LibCell> v_lib_cell) {
                 technologyCount = tech_count;
                 techName.swap(tech_name);
                 LibCellCount = lib_cell_count;
-                vLibCell = v_libcell;
+                vLibCell = v_lib_cell;
             }
 
-            virtual void reset() {
+            void reset() {
                 technologyCount = 0;
                 techName = "";
                 LibCellCount = 0;
@@ -89,11 +89,9 @@ namespace ContestFileParser {
             }
         };
 
-
         struct Die {
             int32_t DieSize[4];
-            double TopDieUtil;
-            double BottomDieUtil;
+            double DieUtil;
 
             struct DieRow {
                 int32_t startXY[2];   ///< x, y
@@ -119,29 +117,25 @@ namespace ContestFileParser {
             };
 
             vector<DieRow> vDieRow;
-            string TopDieTech;
-            string BottomDieTech;
+            string DieTech;
 
             ///constructor
-            Die(int32_t startX, int32_t startY, int32_t sizeX, int32_t sizeY, double top_util, double bot_util,
-                vector<DieRow> v, string &top_tech, string &bot_tech) {
+            Die(int32_t startX, int32_t startY, int32_t sizeX, int32_t sizeY, double util,
+                vector<DieRow> v, string &tech) {
                 DieSize[0] = startX;
                 DieSize[1] = startY;
                 DieSize[2] = sizeX;
                 DieSize[3] = sizeY;
-                TopDieUtil = top_util;
-                BottomDieUtil = bot_util;
+                DieUtil = util;
                 vDieRow = v;
-                TopDieTech.swap(top_tech);
-                BottomDieTech.swap(bot_tech);
+                DieTech.swap(tech);
             }
 
-            virtual void reset() {
+            void reset() {
                 DieSize[0] = DieSize[1] = DieSize[2] = DieSize[3] = 0;
-                TopDieUtil = BottomDieUtil = 0;
+                DieUtil = 0;
                 vDieRow.clear();
-                TopDieTech = "";
-                BottomDieTech = "";
+                DieTech = "";
             }
         };
 
@@ -158,7 +152,7 @@ namespace ContestFileParser {
                 cost = cst;
             }
 
-            virtual void reset() {
+            void reset() {
                 TerminalSize[0] = TerminalSize[1] = 0;
                 spacing = 0;
                 cost = 0;
@@ -169,8 +163,25 @@ namespace ContestFileParser {
         struct Instance {
             int32_t instanceCount;
             int32_t netCount;
-            string instName;
-            string libCellName;
+
+            struct InstCell {
+                string instName;
+                string libCellName;
+
+                ///constructor
+                InstCell(string &inst_name, string &lib_cell_name) {
+                    instName.swap(inst_name);
+                    libCellName.swap(lib_cell_name);
+                }
+
+                virtual void reset() {
+                    instName = "";
+                    libCellName = "";
+                }
+
+
+            };
+
 
             struct InstPin {
                 string instName;
@@ -200,32 +211,60 @@ namespace ContestFileParser {
                     vInstPin = v;
                 }
 
-                virtual void reset() {
+                void reset() {
                     netName = "";
                     numPins = 0;
                     vInstPin.clear();
                 }
             };
 
+            vector<InstCell> vInstCell;
             vector<Net> vNet;
 
+
             ///constructor
-            Instance(int32_t count, int32_t net_count, string &inst_name, string &lib_cell_name, vector<Net> v) {
-                instanceCount = count;
+            Instance(int32_t cell_count, int32_t net_count, vector<Net> v_net, vector<InstCell> v_cell) {
+                instanceCount = cell_count;
                 netCount = net_count;
-                instName.swap(inst_name);
-                libCellName.swap(lib_cell_name);
-                vNet = v;
+                vNet = v_net;
+                vInstCell = v_cell;
             }
 
-            virtual void reset() {
+            void reset() {
                 instanceCount = 0;
                 netCount = 0;
-                instName = "";
-                libCellName = "";
                 vNet.clear();
+                vInstCell.clear();
             }
         };
+
+        vector<Tech> vTech;
+
+        Die TopDie();
+
+        Die BottomDie();
+
+        Terminal myTerminal();
+
+        Instance myInstance();
+
+
+        ///constructor
+        ContestFileDataBase(vector<Tech> v_tech, Die top, Die bottom, Terminal terminal, Instance instance) {
+            vTech = v_tech;
+            TopDie() = top;
+            BottomDie() = bottom;
+            myTerminal() = terminal;
+            myInstance() = instance;
+        }
+
+        void reset() {
+            vTech.clear();
+            TopDie().reset();
+            BottomDie().reset();
+            myTerminal().reset();
+            myInstance().reset();
+        }
     };
 }
 
