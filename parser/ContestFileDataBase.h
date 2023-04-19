@@ -30,10 +30,12 @@ namespace ContestFileParser {
                 int32_t offset[2];
 
                 ///constructor
-                Pin(string &pin_name, int32_t pin_loc[2], int32_t off_set[2]) {
+                Pin(string &pin_name, int32_t locY, int32_t locX, int32_t offsetX, int32_t offsetY) {
                     pinName.swap(pin_name);
-                    pinLocation[2] = pin_loc[2];
-                    offset[2] = off_set[2];
+                    pinLocation[0] = locX;
+                    pinLocation[1] = locY;
+                    offset[0] = offsetX;
+                    offset[1] = offsetY;
                 }
 
                 virtual void reset() {
