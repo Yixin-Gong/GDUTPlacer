@@ -8,191 +8,225 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <cassert>
-#include <limits>
 
 namespace ContestFileParser {
-    using std::cerr;
-    using std::cout;
-    using std::endl;
-    using std::make_pair;
-    using std::ostream;
-    using std::pair;
     using std::string;
     using std::vector;
     typedef int int32_t;
     typedef unsigned int uint32_t;
     typedef long int64_t;
 
-    /// @brief Temporary data structures to hold parsed data.
-    /// Base class for all temporary data structures.
-    struct Item {
-        /// print data members
-        virtual void print(ostream &) const {};
 
-        /// print data members with stream operator
-        /// @param ss output stream
-        /// @param rhs target object
-        /// @return output stream
-        friend ostream &operator<<(ostream &ss, Item const &rhs) {
-            rhs.print(ss);
-            return ss;
-        }
+    class ContestFileDataBase {
+
+        struct Tech {
+            int32_t technologyCount;
+            std::string techName;
+            int32_t LibCellCount;
+
+            struct Pin {
+                string pinName;
+                int32_t pinLocation[2];
+                int32_t offset[2];
+
+                ///constructor
+                Pin(string &pin_name, int32_t locY, int32_t locX, int32_t offsetX, int32_t offsetY) {
+                    pinName.swap(pin_name);
+                    pinLocation[0] = locX;
+                    pinLocation[1] = locY;
+                    offset[0] = offsetX;
+                    offset[1] = offsetY;
+                }
+
+                virtual void reset() {
+                    pinName = "";
+                    pinLocation[0] = pinLocation[1] = 0;
+                    offset[0] = offset[1] = 0;
+                }
+            };
+
+            struct LibCell {
+                bool isMacro;
+                string libCellName;
+                int32_t libCellSize[2];
+                int32_t pinCount;
+                vector<Pin> vPin;
+
+                ///constructor
+                LibCell(bool flag, string &lib_cell_name, int32_t x, int32_t y, int32_t pin_count, vector<Pin> v_pin) {
+                    isMacro = flag;
+                    libCellName.swap(lib_cell_name);
+                    libCellSize[0] = x;
+                    libCellSize[1] = y;
+                    pinCount = pin_count;
+                    vPin = v_pin;
+                }
+
+                virtual void reset() {
+                    isMacro = 0;
+                    libCellName = "";
+                    libCellSize[0] = libCellSize[1] = 0;
+                    pinCount = 0;
+                    vPin.clear();
+                }
+            };
+
+            vector<LibCell> vLibCell;
+
+            ///constructor
+            Tech(int32_t tech_count, string &tech_name, int32_t lib_cell_count, vector<LibCell> v_libcell) {
+                technologyCount = tech_count;
+                techName.swap(tech_name);
+                LibCellCount = lib_cell_count;
+                vLibCell = v_libcell;
+            }
+
+            virtual void reset() {
+                technologyCount = 0;
+                techName = "";
+                LibCellCount = 0;
+                vLibCell.clear();
+            }
+        };
+
+
+        struct Die {
+            int32_t DieSize[4];
+            double TopDieUtil;
+            double BottomDieUtil;
+
+            struct DieRow {
+                int32_t startXY[2];   ///< x, y
+                int32_t rowLength;      ///< row length
+                int32_t rowHeight;      ///< row height
+                int32_t repeatCount; ///< repeat count
+
+                ///constructor
+                DieRow(int32_t x, int32_t y, int32_t length, int32_t height, int32_t repeat) {
+                    startXY[0] = x;
+                    startXY[1] = y;
+                    rowLength = length;
+                    rowHeight = height;
+                    repeatCount = repeat;
+                }
+
+                virtual void reset() {
+                    startXY[0] = startXY[1] = 0;
+                    rowLength = 0;
+                    rowHeight = 0;
+                    repeatCount = 0;
+                }
+            };
+
+            vector<DieRow> vDieRow;
+            string TopDieTech;
+            string BottomDieTech;
+
+            ///constructor
+            Die(int32_t startX, int32_t startY, int32_t sizeX, int32_t sizeY, double top_util, double bot_util,
+                vector<DieRow> v, string &top_tech, string &bot_tech) {
+                DieSize[0] = startX;
+                DieSize[1] = startY;
+                DieSize[2] = sizeX;
+                DieSize[3] = sizeY;
+                TopDieUtil = top_util;
+                BottomDieUtil = bot_util;
+                vDieRow = v;
+                TopDieTech.swap(top_tech);
+                BottomDieTech.swap(bot_tech);
+            }
+
+            virtual void reset() {
+                DieSize[0] = DieSize[1] = DieSize[2] = DieSize[3] = 0;
+                TopDieUtil = BottomDieUtil = 0;
+                vDieRow.clear();
+                TopDieTech = "";
+                BottomDieTech = "";
+            }
+        };
+
+        struct Terminal {
+            int32_t TerminalSize[2];
+            int32_t spacing;
+            int32_t cost;
+
+            ///constructor
+            Terminal(int32_t x, int32_t y, int32_t spc, int32_t cst) {
+                TerminalSize[0] = x;
+                TerminalSize[1] = y;
+                spacing = spc;
+                cost = cst;
+            }
+
+            virtual void reset() {
+                TerminalSize[0] = TerminalSize[1] = 0;
+                spacing = 0;
+                cost = 0;
+            }
+
+        };
+
+        struct Instance {
+            int32_t instanceCount;
+            int32_t netCount;
+            string instName;
+            string libCellName;
+
+            struct InstPin {
+                string instName;
+                string libPinName;
+
+                ///constructor
+                InstPin(string &inst_name, string &pin_name) {
+                    instName.swap(inst_name);
+                    libPinName.swap(pin_name);
+                }
+
+                virtual void reset() {
+                    instName = "";
+                    libPinName = "";
+                }
+            };
+
+            struct Net {
+                string netName;
+                int32_t numPins;
+                vector<InstPin> vInstPin;
+
+                ///constructor
+                Net(string &name, int32_t num_pins, vector<InstPin> v) {
+                    netName.swap(name);
+                    numPins = num_pins;
+                    vInstPin = v;
+                }
+
+                virtual void reset() {
+                    netName = "";
+                    numPins = 0;
+                    vInstPin.clear();
+                }
+            };
+
+            vector<Net> vNet;
+
+            ///constructor
+            Instance(int32_t count, int32_t net_count, string &inst_name, string &lib_cell_name, vector<Net> v) {
+                instanceCount = count;
+                netCount = net_count;
+                instName.swap(inst_name);
+                libCellName.swap(lib_cell_name);
+                vNet = v;
+            }
+
+            virtual void reset() {
+                instanceCount = 0;
+                netCount = 0;
+                instName = "";
+                libCellName = "";
+                vNet.clear();
+            }
+        };
     };
-
-    /// @brief shape box to describe one node shape
-    struct ShapeBox : public Item {
-        string name;      ///< shape name
-        double origin[2]; ///< lower left corner of the box
-        double size[2];   ///< width and height
-        bool isMacro;
-
-        /// @brief constructor
-        /// @param n shape name
-        /// @param x lower left coordinate
-        /// @param y lower left coordinate
-        /// @param w width
-        /// @param h height
-        /// @param flag macro flag
-        ShapeBox(string &n, double x, double y, double w, double h, bool flag) {
-            name.swap(n);
-            origin[0] = x;
-            origin[1] = y;
-            size[0] = w;
-            size[1] = h;
-            isMacro = flag;
-        }
-
-        /// reset all data members
-        void reset() {
-            name = "";
-            origin[0] = origin[1] = 0;
-            size[0] = size[1] = 0;
-            isMacro = 0;
-        }
-    };
-
-    /// @brief node shape to describe the shapes of node
-    struct NodeShape : public Item {
-        string node_name; ///< node name
-        vector <ShapeBox> vShapeBox;
-        bool macro_flag = 0;
-
-        /// reset all data members
-        void reset() {
-            node_name = "";
-            vShapeBox.clear();
-        }
-
-        /// print data members
-        /// @param ss output stream
-        virtual void print(ostream &ss) const {
-            ss << "//////// NodeShape ////////" << endl
-               << "node_name = " << node_name << endl;
-            for (uint32_t i = 0; i < vShapeBox.size(); ++i)
-                ss << vShapeBox[i].name
-                   << " @(" << vShapeBox[i].origin[0] << ", " << vShapeBox[i].origin[1] << ") "
-                   << " w/h (" << vShapeBox[i].size[0] << ", " << vShapeBox[i].size[1] << ")" << endl
-                   << "macro:" << vShapeBox[i].isMacro
-                   << endl;
-            ss << endl;
-        }
-    };
-
-    /// @brief placement row
-    struct Row : public Item {
-        int32_t origin[2];   ///< x, y
-        int32_t length;      ///< row length
-        int32_t height;      ///< row height
-        int32_t repeatCount; ///< repeat count
-        /// constructor
-        Row() {
-            reset();
-        }
-
-        /// reset all data members
-        void reset() {
-            origin[0] = origin[1] = -1;
-            length = 0;
-            height = 0;
-            repeatCount = 0;
-        }
-
-        /// print data members
-        /// @param ss output stream
-        virtual void print(ostream &ss) const {
-            ss << "//////// Row ////////" << endl
-               << "origin = " << origin[0] << " " << origin[1] << endl
-               << "row length = " << length << endl
-               << "row height = " << height << endl
-               << "repeat count = " << repeatCount << endl;
-        }
-    };
-
-    /// @brief describe a pin of a net
-    struct NetPin : public Item {
-        string node_name; ///< node name
-        string pin_name;  ///< pin name
-        char direct;      ///< direction
-        double offset[2]; ///< offset (x, y) to node origin
-        double size[2];   ///< sizes (x, y) of pin
-
-        /// constructor
-        NetPin() {
-            node_name = "";
-            pin_name = "";
-            direct = '\0';
-            offset[0] = 0;
-            offset[1] = 0;
-            size[0] = 0;
-            size[1] = 0;
-        }
-
-        /// constructor
-        /// @param nn node name
-        /// @param d direction
-        /// @param x, y offset of pin to node origin
-        /// @param w, h size of pin
-        /// @param pn pin name
-        NetPin(string &nn, char d, double x, double y, double w, double h, string &pn) {
-            node_name.swap(nn);
-            direct = d;
-            offset[0] = x;
-            offset[1] = y;
-            size[0] = w;
-            size[1] = h;
-            pin_name.swap(pn);
-        }
-
-        /// constructor
-        /// @param nn node name
-        /// @param d direction
-        /// @param x, y offset of pin to node origin
-        /// @param w, h size of pin
-        NetPin(string &nn, char d, double x, double y, double w, double h) {
-            node_name.swap(nn);
-            direct = d;
-            offset[0] = x;
-            offset[1] = y;
-            size[0] = w;
-            size[1] = h;
-            pin_name.clear();
-        }
-
-        /// reset all data members
-        void reset() {
-            node_name = "";
-            pin_name = "";
-            direct = '0';
-            offset[0] = offset[1] = 0;
-            size[0] = size[1] = 0;
-        }
-    };
-
-
 }
 
 
