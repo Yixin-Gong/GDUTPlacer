@@ -4,3 +4,6 @@
 
 #include "ContestFileDataBase.h"
 
+void ContestFileParser::ContestFileDataBase::get_pin_offset() {
+
+}
