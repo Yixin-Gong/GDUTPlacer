@@ -5,5 +5,9 @@
 #include "parser/ContestFileDataBase.h"
 #include "parser/ContetsFileParser.h"
 int main(){
-    std::cout<<"hello world"<<std::endl;
+    file_parser::Parser parser("/home/eric/Desktop/ICCAD-contest-2023-problemB/case1.txt");
+    parser.get_lib_info();
+    parser.get_constraint_info();
+    parser.get_inst_info();
+    parser.display();
 }

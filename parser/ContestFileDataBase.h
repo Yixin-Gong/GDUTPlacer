@@ -11,29 +11,30 @@
 #include <unordered_map>
 #include <vector>
 
-namespace ContestFileParser {
-    using std::string;
-    using std::vector;
-
+namespace file_parser {
     class ContestFileDataBase {
     public:
         struct Pin {
-            string name;
+            std::string name;
             int32_t location[2]{};
             int32_t offset[2]{};
         };
         struct LibCell {
-            bool is_macro{};
-            string name;
+            int32_t is_macro{};
+            std::string name;
             int32_t size[2]{};
             int32_t count{};
-            std::unordered_map<string, Pin> lib_pin{};
+            std::unordered_map<std::string, Pin> lib_pin{};
         };
         struct Tech {
-            int32_t tech_count{};
-            string name;
             int32_t cell_count{};
-            std::unordered_map<string, LibCell> lib_cell{};
+            std::string name;
+            std::unordered_map<std::string, LibCell> lib_cell{};
+        };
+
+        struct Lib{
+            int32_t tech_count;
+            std::unordered_map<std::string, Tech> lib_tech{};
         };
         struct DieRow {
             int32_t start_xy[2]{};   ///< x, y
@@ -41,35 +42,36 @@ namespace ContestFileParser {
             int32_t height{};      ///< row height
             int32_t repeat_count{}; ///< repeat count
         };
-        struct Die {
+        struct Constraint {
             int32_t size[4]{};
-            double util{};
-            DieRow row{};
-            string tech;
-        };
-        struct Terminal {
-            int32_t size[2]{};
-            int32_t spacing{};
-            int32_t cost{};
+            double top_util{};
+            double bottom_util{};
+            DieRow top_row{};
+            DieRow bottom_row{};
+            std::string top_tech;
+            std::string bottom_tech;
+            int32_t t_size[2]{};
+            int32_t t_spacing{};
+            int32_t t_cost{};
         };
         struct InstCell {
-            string name;
-            string lib_name;
+            std::string name;
+            std::string lib_name;
         };
         struct InstPin {
-            string lib_cell_name;
-            string pin_name;
+            std::string lib_cell_name;
+            std::string pin_name;
         };
         struct Net {
-            string name;
+            std::string name;
             int32_t num{};
-            vector<InstPin> v_inst_pin{};
+            std::vector<InstPin> v_inst_pin{};
         };
         struct Instance {
             int32_t inst_count{};
             int32_t net_count{};
-            vector<InstCell> v_inst{};
-            vector<Net> v_net{};
+            std::vector<InstCell> v_inst{};
+            std::vector<Net> v_net{};
         };
 
     public:
