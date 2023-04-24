@@ -3,54 +3,42 @@
 //
 
 #include "ContestFileDataBase.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
 
-namespace ContestFileParser {
+namespace file_parser {
     class Parser {
     public:
-        explicit Parser(string &filename) {
-            static char file_buffer[1024 * 1024 * 128] = {0};
-            fp_ = fopen(filename.c_str(), "r");
+        explicit Parser(const std::string &filename): file_(filename) {
             std::cout << "\nOpen file: " << filename << std::endl;
-            setbuffer(fp_, file_buffer, sizeof(file_buffer));
         }
 
-        ~Parser() {
-            fclose(fp_);
-            lib_.clear();
+        void get_lib_info();
+
+        void get_constraint_info();
+
+        void get_inst_info();
+
+        static std::vector <std::string> split(const std::string &str, char delimiter) {
+            std::vector <std::string> tokens;
+            std::string token;
+            std::istringstream tokenStream(str);
+            while (getline(tokenStream, token, delimiter)) {
+                tokens.push_back(token);
+            }
+            return tokens;
         }
 
-        void getTechInfo();
+        void display();
 
-        void getLibCellInfo();
-
-        void getPinInfo();
-
-        void getDieInfo();
-
-        void getTerminalInfo();
-
-        void getInstInfo();
-
-        void getInstCellInfo();
-
-        void getInstNetInfo();
-
-        void getNetPinInfo();
 
     private:
-        FILE *fp_;
-        ContestFileDataBase::Pin lib_pin_;
-        ContestFileDataBase::LibCell lib_cell_;
-        ContestFileDataBase::Tech tech_info_;
-        std::unordered_map<string, ContestFileDataBase::Tech> lib_;
-
-        ContestFileDataBase::DieRow die_row_;
-        ContestFileDataBase::Die die_;
-        ContestFileDataBase::Terminal terminal_;
-
-        ContestFileDataBase::InstCell inst_cell_;
-        ContestFileDataBase::InstPin inst_pin_;
-        ContestFileDataBase::Net net_;
-        ContestFileDataBase::Instance instance_;
+        std::ifstream file_;
+        ContestFileDataBase::Lib lib_{};
+        ContestFileDataBase::Constraint constraint_{};
+        ContestFileDataBase::Instance instance_{};
     };
 }
