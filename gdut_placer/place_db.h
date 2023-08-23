@@ -1,0 +1,10 @@
+#ifndef GDUTPLACER_DATABASE_PLACE_DB_H_
+#define GDUTPLACER_DATABASE_PLACE_DB_H_
+
+//TODO:Implement PlaceDB class
+class PlaceDB {
+
+};
+
+
+#endif //GDUTPLACER_DATABASE_PLACE_DB_H_

@@ -1,0 +1,9 @@
+#ifndef GDUTPLACER_DATABASE_TERMINAL_H_
+#define GDUTPLACER_DATABASE_TERMINAL_H_
+
+//TODO:Implement Terminal class
+class Termainl{
+
+};
+
+#endif //GDUTPLACER_DATABASE_TERMINAL_H_
