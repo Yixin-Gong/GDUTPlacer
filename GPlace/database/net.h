@@ -3,7 +3,7 @@
 
 #include<iostream>
 #include<vector>
-#include "lib_cell.h"
+#include "database/lib_cell.h"
 
 class Net {
  public:

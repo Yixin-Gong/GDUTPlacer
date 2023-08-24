@@ -3,13 +3,11 @@
 
 #include <iostream>
 #include <array>
-
+#include "database/lib_macro.h"
 //TODO:Implement Macro class
-class Macro {
+class Macro : LibMacro {
  public:
   Macro() {
-    size_[0] = 0;
-    size_[1] = 0;
     loc_[0] = 0;
     loc_[1] = 0;
     angle_ = 0;
@@ -17,9 +15,7 @@ class Macro {
   }
 
   void set_macro();
-  std::array<double, 2> get_center();
  private:
-  std::array<int32_t, 2> size_{};
   std::array<int32_t, 2> loc_{};
   double angle_;
   bool fixed_;

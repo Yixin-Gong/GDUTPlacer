@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <unordered_map>
-#include "lib_pin.h"
+#include "database/lib_pin.h"
 
 class LibMacro {
  public:
