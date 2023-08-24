@@ -1,0 +1,26 @@
+build
+.idea
+.vscode
+.cache
+
+# Compiled Object files
+*.o
+*.obj
+*.lo
+*.slo
+
+# Compiled Static libraries
+*.a
+*.lib
+*.la
+*.lai
+
+#Executables
+*.exe
+*.out
+*.app
+
+#Text files
+*.txt
+*.csv
+
