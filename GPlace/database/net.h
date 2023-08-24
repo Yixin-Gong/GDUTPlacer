@@ -1,9 +1,17 @@
 #ifndef VIOLET_GPLACE_DATABASE_NET_H_
 #define VIOLET_GPLACE_DATABASE_NET_H_
 
-//TODO:Implement Net class
-class Net{
+#include<iostream>
+#include<vector>
+#include "lib_cell.h"
 
+class Net {
+ public:
+  Net() = default;
+
+  void set_net(const std::string &std_cell, const std::string &pin);
+  uint32_t pin_num() { return net_.size(); }
+ private:
+  std::vector<std::pair<std::string, std::string>> net_{};
 };
-
 #endif //VIOLET_GPLACE_DATABASE_NET_H_

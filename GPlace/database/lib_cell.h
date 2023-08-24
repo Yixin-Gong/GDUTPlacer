@@ -2,15 +2,25 @@
 #define  VIOLET_GPLACE_DATABASE_LIB_CELL_H_
 
 #include <iostream>
+#include <array>
+#include <unordered_map>
+#include "lib_pin.h"
 
-class LibCell{
+class LibCell {
  public:
-  LibCell(){
-    int32_t
+  LibCell() {
+    size_[0] = 0;
+    size_[1] = 0;
   }
- private:
-  int32_t size_;
+  const std::unordered_map<std::string, LibPin> &pins() { return pins_; }
+  uint32_t pin_num() { return pins_.size(); }
 
+  void set_size(int32_t l, int32_t w);
+  void add_pin(const std::string &name, LibPin lib_pin);
+  std::array<double, 2> get_center();
+ protected:
+  std::unordered_map<std::string, LibPin> pins_{};
+  int32_t size_[2]{};
 };
 
 #endif //VIOLET_GPLACE_DATABASE_LIB_CELL_H_
