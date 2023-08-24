@@ -1,8 +1,8 @@
 set(TARGET_NAME main)
 
 file(GLOB CPP_SOURCES
-        gdut_place.h
-        gdut_place.cc)
+        Gplace.h
+        Gplace.cc)
 
 file(GLOB BIN_SOURCES
         main.h
@@ -13,7 +13,7 @@ set(INCLUDE_DIRS
 
 set(LINK_LIBS
         preplace_cxx
-        gdut_placer_cxx
+        placemnet_cxx
         utils_cxx
         parser_cxx
         writer_cxx)

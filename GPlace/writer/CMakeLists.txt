@@ -8,7 +8,7 @@ set(INCLUDE_DIRS
 
 set(LINK_LIBS
         utils_cxx
-        gdut_placer_cxx)
+        placement_cxx)
 
 add_library(${TARGET_NAME}_cxx STATIC ${CPP_SOURCES})
 target_include_directories(${TARGET_NAME}_cxx PUBLIC ${INCLUDE_DIRS})

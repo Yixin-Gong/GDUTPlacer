@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 
-project(GDUTPlacer LANGUAGES CXX)
+project(Violet LANGUAGES CXX)
 set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "verbose makefile output")
 
 set(CMAKE_CXX_STANDARD 17)

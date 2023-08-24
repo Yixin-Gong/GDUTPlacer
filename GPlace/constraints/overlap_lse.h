@@ -1,0 +1,7 @@
+#ifndef VIOLET_GPLACE_OVERLAP_LSE_H_
+#define VIOLET_GPLACE_OVERLAP_LSE_H_
+
+class OverlapLse{
+
+};
+#endif //VIOLET_GPLACE_OVERLAP_LSE_H_
