@@ -1,0 +1,9 @@
+#ifndef GDUTPLACER_GPLACE_DATABASE_PIN_H_
+#define GDUTPLACER_GPLACE_DATABASE_PIN_H_
+
+//TODO:Implement Pin class
+class Pin{
+
+};
+
+#endif //#ifndef GDUTPLACER_GPLACE_DATABASE_PIN_H_

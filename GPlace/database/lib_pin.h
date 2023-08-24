@@ -1,0 +1,9 @@
+#ifndef GDUTPLACER_GPLACE_DATABASE_LIB_PIN_H_
+#define GDUTPLACER_GPLACE_DATABASE_LIB_PIN_H_
+
+//TODO:Implement LibPin class
+class LibPin{
+
+};
+
+#endif //GDUTPLACER_GPLACE_DATABASE_LIB_PIN_H_

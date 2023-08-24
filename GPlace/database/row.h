@@ -1,0 +1,9 @@
+#ifndef GDUTPLACER_GPLACE_DATABASE_H_
+#define GDUTPLACER_GPLACE_DATABASE_H_
+
+//TODO:Implement Row class
+class Row{
+
+};
+
+#endif //GDUTPLACER_GPLACE_DATABASE_H_

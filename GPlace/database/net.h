@@ -1,0 +1,9 @@
+#ifndef GDUTPLACER_GPLACE_DATABASE_NET_H_
+#define GDUTPLACER_GPLACE_DATABASE_NET_H_
+
+//TODO:Implement Net class
+class Net{
+
+};
+
+#endif //GDUTPLACER_GPLACE_DATABASE_NET_H_

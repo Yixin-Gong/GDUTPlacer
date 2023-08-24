@@ -1,0 +1,9 @@
+#ifndef GDUTPLACER_GPLACE_DATABASE_LIB_MACRO_H_
+#define GDUTPLACER_GPLACE_DATABASE_LIB_MACRO_H_
+
+//TODO:Implement LibMacro class
+class LibMacro{
+
+};
+
+#endif //GDUTPLACER_GPLACE_DATABASE_LIB_MACRO_H_
