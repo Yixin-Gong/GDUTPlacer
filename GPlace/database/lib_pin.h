@@ -4,17 +4,21 @@
 #include <iostream>
 #include <array>
 
-class LibPin {
- public:
-  LibPin() {
+class LibPin
+{
+public:
+  LibPin()
+  {
     offset_[0] = 0;
     offset_[1] = 0;
   }
 
-  void set_offset(const int32_t &x,const int32_t &y);
+  const std::array<int32_t, 2> &offset() const { return offset_; }
+  std::array<int32_t, 2> &offset() { return offset_; }
+  void set_offset(const int32_t &x, const int32_t &y);
 
- protected:
+protected:
   std::array<int32_t, 2> offset_{};
 };
 
-#endif //VIOLET_GPLACE_DATABASE_LIB_PIN_H_
+#endif // VIOLET_GPLACE_DATABASE_LIB_PIN_H_
