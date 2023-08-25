@@ -15,9 +15,9 @@ public:
     fixed_ = false;
   }
   const std::array<int32_t, 2> &loc_xy() const { return loc_xy_; }
-  std::array<int32_t,2> &loc_xy() {return lox_xy_;}
-  const std::unordered_map<std::string,Pin> &pins() const {return pins_;}
-  std::unordered_map<std::string,Pin> &pins(){return pins_;}
+  std::array<int32_t, 2> &loc_xy() { return loc_xy_; }
+  const std::unordered_map<std::string, Pin> &pins() const { return pins_; }
+  std::unordered_map<std::string, Pin> &pins() { return pins_; }
 
   void fix_cell() { this->fixed_ = true; }
 
