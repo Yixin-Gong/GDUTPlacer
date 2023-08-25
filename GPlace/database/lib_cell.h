@@ -19,8 +19,7 @@ public:
   std::unordered_map<std::string, LibPin> &pins() { return pins_; }
   const std::array<int32_t, 2> &size() const { return size_; }
   std::array<int32_t, 2> &size() { return size_; }
-  const void set_size(const int32_t &l, const int32_t &w);
-  
+  void set_size(const int32_t &l, const int32_t &w);
   void set_pin_num(const uint32_t &num) { this->pin_num_ = num; };
   void add_pin(const std::string &name, LibPin &lib_pin);
   void is_macro() { this->is_macro_ = 1; }
