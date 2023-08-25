@@ -13,7 +13,6 @@ class Technology {
   void add_lib_cell(const std::string &name, LibCell &lib_cell);
   void set_lib_cell_count(const uint32_t &num);
   uint32_t &get_lib_cell_count() { return lib_cell_count_; }
-  void set_tech_name(const std::string &name);
  private:
   std::unordered_map<std::string, LibCell> lib_cell_map_{};
   uint32_t lib_cell_count_{};

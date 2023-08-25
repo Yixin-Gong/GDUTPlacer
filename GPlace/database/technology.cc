@@ -6,6 +6,3 @@ void Technology::add_lib_cell(const std::string &name, LibCell &lib_cell) {
 void Technology::set_lib_cell_count(const uint32_t &num) {
   this->lib_cell_count_ = num;
 }
-void Technology::set_tech_name(const std::string &name) {
-  this->name_ = name;
-}
