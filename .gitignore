@@ -19,8 +19,3 @@ build
 *.exe
 *.out
 *.app
-
-#Text files
-*.txt
-*.csv
-
