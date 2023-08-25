@@ -11,7 +11,7 @@ class LibPin {
     offset_[1] = 0;
   }
 
-  void set_offset(int32_t x, int32_t y);
+  void set_offset(const int32_t &x,const int32_t &y);
 
  protected:
   std::array<int32_t, 2> offset_{};

@@ -11,6 +11,8 @@ set(LINK_LIBS
 
 add_library(${TARGET_NAME}_cxx STATIC ${CPP_SOURCES}
         technology.cc
-        technology.h)
+        technology.h
+        die.cc
+        die.h)
 target_include_directories(${TARGET_NAME}_cxx PUBLIC ${INCLUDE_DIRS})
 target_link_directories(${TARGET_NAME}_cxx PUBLIC ${LINK_LIBS})

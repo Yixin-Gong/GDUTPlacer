@@ -1,5 +1,5 @@
 #include "database/pin.h"
-
-//TODO:Implement set offset method for pin
-void Pin::set_offset(const std::string &lib_pin_name,const std::string &tech) {
+void Pin::set_pin_pos(const std::array<int32_t, 2> &offset, const std::array<int32_t, 2> &loc) {
+  this->pin_pos_[0] = loc[0] + offset[0];
+  this->pin_pos_[1] = loc[1] + offset[1];
 }

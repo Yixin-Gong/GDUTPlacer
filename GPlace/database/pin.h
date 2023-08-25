@@ -12,8 +12,8 @@ class Pin : LibPin {
     pin_pos_[0] = 0;
     pin_pos_[1] = 0;
   }
+  void set_pin_pos(const std::array<int32_t, 2> &offset,const std::array<int32_t, 2> &loc);
  private:
-  std::array<int32_t, 2> offset_{};
   std::array<int32_t, 2> pin_pos_{};
 };
 

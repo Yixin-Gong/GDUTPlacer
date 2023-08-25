@@ -13,8 +13,8 @@ class Terminal {
     cost_ = 0;
   }
 
-  int32_t &get_spacing() { return spacing_; }
-  int32_t &get_cost() { return cost_; }
+  int32_t &get_spacing() { return this->spacing_; }
+  int32_t &get_cost() { return this->cost_; }
 
   void set_terminal(int32_t l, int32_t w, int32_t spacing, int32_t cost);
 

@@ -10,13 +10,13 @@ class StdCell :LibCell {
   StdCell() {
     loc_xy_[0] = 0;
     loc_xy_[1] = 0;
-    fixed = false;
+    fixed_ = false;
   }
-  void set_cell();
+  void fix_cell(){this->fixed_ = true;}
  private:
   std::array<int32_t, 2> loc_xy_{};
   std::unordered_map<std::string, Pin> pins_{};
-  bool fixed{};
+  bool fixed_{};
 };
 
 #endif //VIOLET_GPLACE_DATABASE_STD_CELL_H_

@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <array>
-#include "database/lib_macro.h"
-//TODO:Implement Macro class
-class Macro : LibMacro {
+#include "database/lib_cell.h"
+
+class Macro : LibCell {
  public:
   Macro() {
     loc_[0] = 0;
@@ -14,7 +14,7 @@ class Macro : LibMacro {
     fixed_ = false;
   }
 
-  void set_macro();
+//  void set_macro(std::string name);
  private:
   std::array<int32_t, 2> loc_{};
   double angle_;
