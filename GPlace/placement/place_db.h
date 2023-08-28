@@ -13,12 +13,7 @@ class PlaceDB {
   PlaceDB()=default;
   void init();
   void write_db();
- private:
-  Die top_die_{};
-  Die bottom_die_{};
-  Terminal terminal_{};
-  std::unordered_map<std::string, Net> nets_{};
-  std::unordered_map<std::string, Technology> tech_lib_{};
+
 };
 
 

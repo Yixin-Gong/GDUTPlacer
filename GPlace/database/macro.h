@@ -22,7 +22,7 @@ public:
   double angel() { return angle_; }
   
   bool is_fix() { return fixed_; }
-  bool fix_macro() { fixed_ = true; }
+  void  fix_macro() { fixed_ = true; }
 
   //  void set_macro(std::string name);
 private:
