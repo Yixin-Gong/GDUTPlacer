@@ -23,7 +23,7 @@ public:
   void set_pin_num(const uint32_t &num) { this->pin_num_ = num; };
   void add_pin(const std::string &name, LibPin &lib_pin);
   void is_macro() { this->is_macro_ = 1; }
-  
+
   std::array<double, 2> get_center();
   uint32_t pin_num() { return pin_num_; }
 

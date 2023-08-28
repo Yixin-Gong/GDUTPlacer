@@ -1,9 +1,9 @@
 #ifndef VIOLET_GPLACE_DATABASE_SUPER_SET_H_
 #define VIOLET_GPLACE_DATABASE_SUPER_SET_H_
 
-//TODO:Implement SuperSet class
-class SuperSet{
-
+// TODO:Implement SuperSet class
+class SuperSet
+{
 };
 
-#endif //VIOLET_GPLACE_DATABASE_SUPER_SET_H_
+#endif // VIOLET_GPLACE_DATABASE_SUPER_SET_H_
