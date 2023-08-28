@@ -8,3 +8,4 @@ void Technology::set_lib_cell_count(const uint32_t &num)
 {
   this->lib_cell_count_ = num;
 }
+

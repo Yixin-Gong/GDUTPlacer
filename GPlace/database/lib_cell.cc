@@ -16,3 +16,4 @@ std::array<double, 2> LibCell::get_center()
   center[1] = this->size_[1] * 0.5;
   return center;
 }
+

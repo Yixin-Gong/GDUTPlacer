@@ -25,7 +25,7 @@ public:
   void is_macro() { this->is_macro_ = 1; }
 
   std::array<double, 2> get_center();
-  uint32_t pin_num() { return pin_num_; }
+  uint32_t pin_num() const { return pin_num_; }
 
 protected:
   std::unordered_map<std::string, LibPin> pins_{};
