@@ -1,7 +1,3 @@
-//
-// Created by eric on 23-8-25.
-//
-
 #include "die.h"
 void Die::set_size(const int32_t &xl, const int32_t &xh, const int32_t &yl, const int32_t &yh) {
   this->xl_ = xl;

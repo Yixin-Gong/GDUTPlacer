@@ -1,7 +1,3 @@
-//
-// Created by eric on 23-8-25.
-//
-
 #ifndef VIOLET_GPLACE_DATABASE_DIE_H_
 #define VIOLET_GPLACE_DATABASE_DIE_H_
 
