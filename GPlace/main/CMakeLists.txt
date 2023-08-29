@@ -8,6 +8,7 @@ file(GLOB BIN_SOURCES
         main.h
         main.cc)
 
+
 set(INCLUDE_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
@@ -16,8 +17,10 @@ set(LINK_LIBS
         placemnet_cxx
         utils_cxx
         parser_cxx
-        writer_cxx)
+        writer_cxx
+)
 
 add_executable(GPlace ${CPP_SOURCES} ${BIN_SOURCES})
+target_link_libraries(GPlace ${TORCH_LIBRARIES})
 target_include_directories(GPlace PUBLIC ${INCLUDE_DIRS})
 target_link_directories(GPlace PUBLIC ${LINK_LIBS})

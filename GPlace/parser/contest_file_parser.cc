@@ -1,15 +1,15 @@
 #include "parser/contest_file_parser.h"
-#include <chrono>
 #include <iostream>
 #include <sstream>
 #include <vector>
 
 void ContestParser::parse() {
-  std::string tech_name, lib_cell_name, pin_name;
+  std::string tech_name, lib_cell_name, pin_name,net_name;
   std::string line;
   Technology technology;
   LibCell lib_cell;
   LibPin lib_pin;
+  StdCell cell;
 
   while (std::getline(file_, line)) {
     std::vector<std::string> tokens = split_(line, ' ');
@@ -42,8 +42,34 @@ void ContestParser::parse() {
         db_.top_die().set_util(std::stoi(tokens[1]));
       } else if (tokens[0] == "BottomDieMaxUtil") {
         db_.bottom_die().set_util(std::stoi(tokens[1]));
-      } else if (tokens[0] == "TopDieRows"){
-
+      } else if (tokens[0] == "TopDieRows") {
+        db_.top_die().start_xy()[0] = std::stoi(tokens[1]);
+        db_.top_die().start_xy()[1] = std::stoi(tokens[2]);
+        db_.top_die().row_lh()[0] = std::stoi(tokens[3]);
+        db_.top_die().row_lh()[1] = std::stoi(tokens[4]);
+        db_.top_die().repeat() = std::stoi(tokens[5]);
+      } else if (tokens[0] == "BottomDieRows") {
+        db_.bottom_die().start_xy()[0] = std::stoi(tokens[1]);
+        db_.bottom_die().start_xy()[1] = std::stoi(tokens[2]);
+        db_.bottom_die().row_lh()[0] = std::stoi(tokens[3]);
+        db_.bottom_die().row_lh()[1] = std::stoi(tokens[4]);
+        db_.bottom_die().repeat() = std::stoi(tokens[5]);
+      } else if (tokens[0] == "TopDieTech") {
+        db_.top_die().set_tech(tokens[1]);
+      } else if (tokens[0] == "BottomDieTech") {
+        db_.bottom_die().set_tech(tokens[1]);
+      } else if (tokens[0] == "TerminalSize") {
+        db_.terminal().set_size(std::stoi(tokens[1]), std::stoi(tokens[2]));
+      } else if (tokens[0] == "TerminalSpacing") {
+        db_.terminal().set_spacing(std::stoi(tokens[1]));
+      } else if (tokens[0] == "TerminalCost") {
+        db_.terminal().set_cost(std::stoi(tokens[1]));
+      } else if (tokens[0] == "Inst") {
+        db_.cell2lib().emplace(tokens[1], tokens[2]);
+      } else if (tokens[0] == "Net"){
+        net_name = tokens[1];
+      } else if (tokens[0] == "Pin"){
+        
       }
     }
   }

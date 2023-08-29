@@ -1,3 +1,9 @@
 #include "database/macro.h"
 
-//TODO:Implement set_macro method for macro instance
+void Macro::set_lib(const std::string &lib_name) {
+  lib_name_ = lib_name;
+}
+
+void Macro::fix_macro() {
+  fixed_ = true;
+}

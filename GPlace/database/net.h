@@ -9,14 +9,10 @@ class Net
 {
 public:
   Net() = default;
+  std::vector<LibCell> &net() { return v_net_; }
 
-  const std::vector<std::pair<std::string, std::string>> &net() const { return net_; }
-  std::vector<std::pair<std::string, std::string>> &net() { return net_; }
-
-  void set_net(const std::string &std_cell, const std::string &pin);
-  uint32_t pin_num() { return net_.size(); }
-
+  uint32_t pin_num() { return v_net_.size(); }
 private:
-  std::vector<std::pair<std::string, std::string>> net_{};
+  std::vector<LibCell> v_net_{};
 };
 #endif // VIOLET_GPLACE_DATABASE_NET_H_

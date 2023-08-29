@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <array>
-#include "database/pin.h"
 #include "database/lib_cell.h"
 class StdCell : LibCell
 {
@@ -16,14 +15,14 @@ public:
   }
   const std::array<int32_t, 2> &loc_xy() const { return loc_xy_; }
   std::array<int32_t, 2> &loc_xy() { return loc_xy_; }
-  const std::unordered_map<std::string, Pin> &pins() const { return pins_; }
-  std::unordered_map<std::string, Pin> &pins() { return pins_; }
-
-  void fix_cell() { this->fixed_ = true; }
+//  const std::unordered_map<std::string, Pin> &pins() const { return pins_; }
+//  std::unordered_map<std::string, Pin> &pins() { return pins_; }
+  void set_lib(const std::string &lib_name);
+  void fix_cell();
 
 private:
   std::array<int32_t, 2> loc_xy_{};
-  std::unordered_map<std::string, Pin> pins_{};
+  std::string lib_name_;
   bool fixed_{};
 };
 

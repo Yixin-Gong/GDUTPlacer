@@ -16,16 +16,12 @@ public:
   }
 
   std::array<int32_t, 2> &get_size() { return size_; }
-  const std::array<int32_t, 2> &get_size() const { return size_; }
-
   int32_t &get_spacing() { return spacing_; }
-  const int32_t &get_spacing() const { return spacing_; }
-
   int32_t &get_cost() { return cost_; }
-  const int32_t &get_cost() const { return cost_; }
-  
-  void set_terminal(int32_t l, int32_t w, int32_t spacing, int32_t cost);
 
+  void set_size(const int32_t &l,const int32_t &w);
+  void set_spacing(const int32_t &spacing);
+  void set_cost(const int32_t &cost);
   std::array<double, 2> get_center();
 
 private:

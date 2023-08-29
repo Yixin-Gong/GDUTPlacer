@@ -19,8 +19,8 @@ class Die {
   int32_t &get_util() { return this->max_util_; }
   std::array<int32_t, 2> &start_xy() { return start_xy_; }
   std::array<int32_t, 2> &row_lh() { return row_lh_; }
-  int32_t &get_repeat() { return this->repeat_count_; }
-  std::string &get_tech() { return this->tech_name_; }
+  int32_t &repeat() { return this->repeat_count_; }
+  const std::string &get_tech() { return this->tech_name_; }
 
  private:
   std::array<int32_t, 4> size_{};

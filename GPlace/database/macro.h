@@ -5,11 +5,9 @@
 #include <array>
 #include "database/lib_cell.h"
 
-class Macro : LibCell
-{
-public:
-  Macro()
-  {
+class Macro : LibCell {
+ public:
+  Macro() {
     loc_[0] = 0;
     loc_[1] = 0;
     angle_ = 0;
@@ -18,15 +16,16 @@ public:
 
   const std::array<int32_t, 2> &loc() const { return loc_; }
   std::array<int32_t, 2> &loc() { return loc_; }
-  const double angle() const { return angle_; }
-  double angel() { return angle_; }
+  const double &angle() const { return angle_; }
+  double &angel() { return angle_; }
+  bool &is_fix() { return fixed_; }
+  void set_lib(const std::string &lib_name);
+  void fix_macro();
 
-  bool is_fix() { return fixed_; }
-  void fix_macro() { fixed_ = true; }
-
-  //  void set_macro(std::string name);
-private:
+ private:
   std::array<int32_t, 2> loc_{};
+  std::string macro_name_;
+  std::string lib_name_;
   double angle_;
   bool fixed_;
 };

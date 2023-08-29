@@ -1,5 +1,5 @@
-#ifndef GDUTPLACER_DATABASE_PLACE_DB_H_
-#define GDUTPLACER_DATABASE_PLACE_DB_H_
+#ifndef VIOLET_DATABASE_PLACE_DB_H_
+#define VIOLET_DATABASE_PLACE_DB_H_
 
 #include <iostream>
 #include <vector>
@@ -8,13 +8,14 @@
 #include "database/technology.h"
 #include "database/die.h"
 #include "database/net.h"
-class PlaceDB {
+#include <torch/torch.h>
+
+class PlaceDB : torch::nn::Module{
  public:
-  PlaceDB()=default;
+  PlaceDB() = default;
   void init();
   void write_db();
 
 };
 
-
-#endif //GDUTPLACER_DATABASE_PLACE_DB_H_
+#endif //VIOLET_DATABASE_PLACE_DB_H_
