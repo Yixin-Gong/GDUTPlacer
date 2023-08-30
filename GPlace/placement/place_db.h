@@ -4,17 +4,17 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include "database/terminal.h"
-#include "database/technology.h"
-#include "database/die.h"
-#include "database/net.h"
 #include <torch/torch.h>
-
-class PlaceDB : torch::nn::Module{
+#include "database/hierarchy_db.h"
+class PlaceDB : torch::nn::Module {
  public:
-  PlaceDB() = default;
-  void init();
-  void write_db();
+  PlaceDB(const HierarchyDB &db) {
+    init(db);
+  };
+  void init(const HierarchyDB &db);
+ TORCH_ARG(Die, top_die);
+ TORCH_ARG(Die, bottom_die);
+ TORCH_ARG(Terminal, termianl);
 
 };
 

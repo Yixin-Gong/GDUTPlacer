@@ -4,7 +4,9 @@ file(GLOB CPP_SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/*.cc")
 
 set(INCLUDE_DIRS
-        ${CMAKE_CURRENT_SOURCE_DIR}/..)
+        ${CMAKE_CURRENT_SOURCE_DIR}/..
+        ${Boost_INCLUDE_DIRS}
+)
 
 set(LINK_LIBS
         utils_cxx)
