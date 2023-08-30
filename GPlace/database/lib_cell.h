@@ -6,11 +6,10 @@
 #include <array>
 #include <unordered_map>
 #include "database/lib_pin.h"
-class LibCell
-{
-public:
-  LibCell()
-  {
+
+class LibCell {
+ public:
+  LibCell() {
     size_[0] = 0;
     size_[1] = 0;
     is_macro_ = 0;
@@ -27,7 +26,7 @@ public:
   std::array<double, 2> get_center();
   uint32_t pin_num() const { return pin_num_; }
 
-protected:
+ protected:
   std::unordered_map<std::string, LibPin> pins_{};
   std::array<int32_t, 2> size_{};
   uint32_t pin_num_{};

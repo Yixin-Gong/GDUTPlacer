@@ -4,18 +4,16 @@
 #include <iostream>
 #include <array>
 
-class LibPin
-{
-public:
-  LibPin()
-  {
+class LibPin {
+ public:
+  LibPin() {
     offset_[0] = 0;
     offset_[1] = 0;
   }
   std::array<int32_t, 2> &offset() { return offset_; }
   void set_offset(const int32_t &x, const int32_t &y);
 
-protected:
+ protected:
   std::array<int32_t, 2> offset_{};
 };
 

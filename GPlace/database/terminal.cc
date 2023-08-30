@@ -1,8 +1,8 @@
 #include "database/terminal.h"
 
-void Terminal::set_size(const int32_t &l,const int32_t &w) {
-  size_[0] =l;
-  size_[1] =w;
+void Terminal::set_size(const int32_t &l, const int32_t &w) {
+  size_[0] = l;
+  size_[1] = w;
 }
 
 void Terminal::set_spacing(const int32_t &spacing) {

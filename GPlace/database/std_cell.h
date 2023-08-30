@@ -4,11 +4,9 @@
 #include <iostream>
 #include <array>
 #include "database/lib_cell.h"
-class StdCell : LibCell
-{
-public:
-  StdCell()
-  {
+class StdCell : LibCell {
+ public:
+  StdCell() {
     loc_xy_[0] = 0;
     loc_xy_[1] = 0;
     fixed_ = false;
@@ -20,7 +18,7 @@ public:
   void set_lib(const std::string &lib_name);
   void fix_cell();
 
-private:
+ private:
   std::array<int32_t, 2> loc_xy_{};
   std::string lib_name_;
   bool fixed_{};

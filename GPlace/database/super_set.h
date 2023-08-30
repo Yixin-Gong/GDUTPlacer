@@ -2,8 +2,7 @@
 #define VIOLET_GPLACE_DATABASE_SUPER_SET_H_
 
 // TODO:Implement SuperSet class
-class SuperSet
-{
+class SuperSet {
 };
 
 #endif // VIOLET_GPLACE_DATABASE_SUPER_SET_H_

@@ -22,4 +22,3 @@ void Die::set_util(const int32_t &util) {
 void Die::set_tech(const std::string &tech) {
   this->tech_name_ = tech;
 }
-
