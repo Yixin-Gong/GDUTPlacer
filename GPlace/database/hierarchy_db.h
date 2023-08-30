@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <boost/polygon/polygon.hpp>
 #include "database/terminal.h"
 #include "database/technology.h"
 #include "database/die.h"
@@ -14,8 +15,6 @@
 class HierarchyDB {
  public:
   HierarchyDB() = default;
-  void init_db();
-  void write_db();
 
   Die &top_die() { return top_die_; }
   const Die &top_die() const { return top_die_; }
