@@ -5,13 +5,16 @@
 #include <iostream>
 #include <vector>
 #include "database/hierarchy_db.h"
-class ContestParser
-{
-public:
-  explicit ContestParser(const std::string &filename, HierarchyDB &db)
-      : db_(db), file_(filename), filename_(filename){}
+class ContestParser {
+ public:
+  ContestParser(const std::string &filename, HierarchyDB &db)
+      : db_(db), file_(filename), filename_(filename) {}
+
   void parse();
-private:
+
+  const HierarchyDB &db() const { return db_; }
+  HierarchyDB &db() { return db_; }
+ private:
   std::ifstream file_;
   std::string filename_;
   HierarchyDB &db_;
