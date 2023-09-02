@@ -8,10 +8,10 @@
 class Net {
  public:
   Net() = default;
-  std::vector<LibCell> &net() { return v_net_; }
+  std::unordered_map<std::string, std::string> &net() { return net_; }
 
-  uint32_t pin_num() { return v_net_.size(); }
+  uint32_t pin_num() { return net_.size(); }
  private:
-  std::vector<LibCell> v_net_{};
+  std::unordered_map<std::string, std::string> net_{};
 };
 #endif // VIOLET_GPLACE_DATABASE_NET_H_
